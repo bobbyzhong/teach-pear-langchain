@@ -10,6 +10,7 @@ specifiers:
   eslint-config-next: 13.4.4-canary.11
   langchain: ^0.0.99
   next: 13.4.4-canary.11
+  openai-edge: ^1.1.0
   postcss: ^8.4.23
   react: 18.2.0
   react-dom: ^18.2.0
@@ -20,6 +21,7 @@ dependencies:
   ai: 2.1.12_react@18.2.0
   langchain: 0.0.99
   next: 13.4.4-canary.11_biqbaboplfbrettd7655fr4n2y
+  openai-edge: 1.1.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -2454,6 +2456,11 @@ packages:
       is-inside-container: 1.0.0
       is-wsl: 2.2.0
     dev: true
+
+  /openai-edge/1.1.0:
+    resolution: {integrity: sha512-VkXT7yhKjr1QlC/wIMuPW/s003cPHUtiNjt/kH+54iKDZZ7eiGMPuymhpSWJ/zVZfVz6+94okGd6rNuu7JRBDw==}
+    engines: {node: '>=12'}
+    dev: false
 
   /openai/3.3.0:
     resolution: {integrity: sha512-uqxI/Au+aPRnsaQRe8CojU0eCR7I0mBiKjD3sNMzY6DaC1ZVrc85u98mtJW6voDug8fgGN+DIZmTDxTthxb7dQ==}
