@@ -2,12 +2,7 @@ import { StreamingTextResponse, LangChainStream, Message } from "ai";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { AIChatMessage, HumanChatMessage } from "langchain/schema";
 import { StructuredOutputParser } from "langchain/output_parsers";
-import {
-    ChatPromptTemplate,
-    HumanMessagePromptTemplate,
-    PromptTemplate,
-    SystemMessagePromptTemplate,
-} from "langchain/prompts";
+import { PromptTemplate } from "langchain/prompts";
 
 export const runtime = "edge";
 

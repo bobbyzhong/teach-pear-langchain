@@ -1,44 +1,25 @@
-// app/api/completion/route.ts
-
-import { Configuration, OpenAIApi } from "openai-edge";
-import { OpenAIStream, StreamingTextResponse } from "ai";
+import { OpenAI } from "langchain/llms/openai";
+import { NextResponse } from "next/server";
+import { PromptTemplate } from "langchain/prompts";
+import { loadSummarizationChain } from "langchain/chains";
+import { readFile } from "fs";
 
 export const runtime = "edge";
 
-const apiConfig = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY!,
-});
-
-const openai = new OpenAIApi(apiConfig);
-
 export async function POST(req: Request) {
-    // Extract the `prompt` from the body of the request
-    const { prompt } = await req.json();
+    const body = await req.json();
+    const content = body.query;
 
-    const promptObj = JSON.parse(prompt);
+    const model = new OpenAI({ temperature: 0 });
 
-    // Request the OpenAI API for the response based on the prompt
-    const response = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        stream: true,
-        // a precise prompt is important for the AI to reply with the correct tokens
-        messages: [
-            {
-                role: "user",
-                content: `Given the content simplify it so that a 3rd grader can understand it. 
-                Content: ${promptObj.content}
-        
-Output:\n`,
-            },
-        ],
-        max_tokens: 200,
-        temperature: 0, // you want absolute certainty for spell check
-        top_p: 1,
-        frequency_penalty: 1,
-        presence_penalty: 1,
+    const template = "What is the summary of this content: {content}";
+    const promptA = new PromptTemplate({
+        template,
+        inputVariables: ["content"],
     });
 
-    const stream = OpenAIStream(response);
+    const responseA = await promptA.format({ content: content });
 
-    return new StreamingTextResponse(stream);
+    const res = await model.call(responseA);
+    return NextResponse.json({ res });
 }
