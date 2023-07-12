@@ -2,7 +2,6 @@ import { OpenAI } from "langchain/llms/openai";
 import { NextResponse } from "next/server";
 import { PromptTemplate } from "langchain/prompts";
 import { loadSummarizationChain } from "langchain/chains";
-import { readFile } from "fs";
 
 export const runtime = "edge";
 
