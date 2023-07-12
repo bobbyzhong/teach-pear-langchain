@@ -30,7 +30,7 @@ export default function PostEditorPage() {
         async (config: any) => {
             const completion = await complete(config);
 
-            if (!completion) throw new Error("Completion didn't work");
+            if (!completion) throw new Error("Completion did not work");
             console.log("string version:");
             console.log(completion);
             const compList = completion.split(/\r?\n/);
