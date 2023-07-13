@@ -1,8 +1,8 @@
 import "./globals.css";
-import { Outfit } from "next/font/google";
+import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 
-const outfit = Outfit({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
     title: "Create Next App",
@@ -16,10 +16,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={outfit.className}>
-                <Navbar />
-                {children}
-            </body>
+            <body className={inter.className}>{children}</body>
         </html>
     );
 }

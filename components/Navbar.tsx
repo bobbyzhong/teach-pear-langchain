@@ -23,13 +23,13 @@ export default function Navbar({ className }: { className?: string }) {
 
     return (
         <div
-            className={`${transparent} lg:mx-auto bg-none  w-full z-[999] ${className} `}
+            className={`${transparent} font-outfit lg:mx-auto bg-none  w-full z-[999] ${className} `}
         >
             <div className="flex items-center justify-between py-1 ">
                 {/* Logo */}
-                <h1>
+                <h1 className="font-outfit">
                     <Link href={"/"}>
-                        <p className={`text-[2.2rem] ml-8 my-4`}>🍐 Pear</p>
+                        <p className={`text-[2.2rem] ml-8 my-4 `}>🍐 Pear</p>
                     </Link>
                 </h1>
                 {/* Hamburger Menu */}
