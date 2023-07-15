@@ -3,7 +3,6 @@
 import { useCompletion } from "ai/react";
 import { useState, useEffect, useCallback } from "react";
 import { InputBox, LargeInputBox, SelectBox } from "@/components/Inputs";
-import { divide } from "react-native-reanimated";
 
 const QUIZ_CONFIG_INITIAL = {
     content: "",
