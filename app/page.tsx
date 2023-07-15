@@ -28,8 +28,8 @@ export default function HomePage() {
                         human side of teaching
                     </div>
                     <div className="text-[1.2rem] text-gray-200  lg:text-zinc-700 w-8/12 my-8">
-                        Easily create quality teaching material such as quizzes,
-                        worksheets, and handouts using Pear
+                        Easily create custom teaching material such as quizzes,
+                        worksheets, and handouts using AI through Pear
                     </div>
                     <div className="text-[1rem] text-gray-200  lg:text-zinc-700 w-8/12 mb-3">
                         Enter your email to try out beta!

@@ -7,8 +7,8 @@ import NavLink from "./NavLink";
 
 export default function VertNav() {
     return (
-        <div className="absolute bg-[#e9e9e9] h-screen">
-            <div className="flex flex-col justify-between h-full">
+        <div className="sticky top-0  bg-[#f5f5f5] h-screen w-[35rem] 2xl:w-[20rem]">
+            <div className="flex flex-col h-full justify-between">
                 <div className="">
                     <h1 className="font-outfit">
                         <Link href={"/"}>

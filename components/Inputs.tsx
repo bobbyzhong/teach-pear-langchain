@@ -13,13 +13,15 @@ export function InputBox({
     value,
 }: InputTypes) {
     return (
-        <div className=" flex flex-col ">
-            <label className="">
-                <span className="font-[250] text-sm">{label}</span>
+        <div className=" flex flex-col">
+            <label className="mb-1">
+                <span className="font-medium text-zinc-500 text-sm">
+                    {label}
+                </span>
             </label>
             <input
                 className={`
-               border py-2 px-4 rounded-lg
+               border-2 py-2 px-4 rounded-lg
                 ${statusCompleted ? "" : ""}  `}
                 type={type}
                 name={name}
@@ -74,19 +76,19 @@ export function LargeInputBox({
     statusCompleted,
 }: InputTypes) {
     return (
-        <div className=" flex flex-col ">
+        <div className=" flex flex-col   ">
             <label className="">
                 <span className="font-[250] text-sm ">{label}</span>
             </label>
             <textarea
-                className={`mt-3
-               border py-2 px-4 rounded-xl shadow-md}
+                className={` bg-[#fefefe]
+               border py-4 px-5 rounded-xl shadow-md resize-none }
                 ${statusCompleted ? "" : ""}  `}
                 name={name}
                 placeholder={placeholder}
                 onChange={handleChange}
                 required={true}
-                rows={4}
+                rows={19}
                 value={value}
             />
         </div>
@@ -133,12 +135,12 @@ export function SelectBox({
 }: SelectTypes) {
     return (
         <div className="form-control w-full ">
-            <label className="block mb-2 text-sm">{label}</label>
+            <label className="font-medium text-zinc-500 text-sm">{label}</label>
             <select
                 onChange={handleChange}
                 name={name}
                 id="countries"
-                className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                className="border-2 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
             >
                 {options.map((op, index) => (
                     <option key={index} value={op}>
