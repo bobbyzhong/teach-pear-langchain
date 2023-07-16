@@ -3,16 +3,14 @@
 import { useCompletion } from "ai/react";
 import { useState, useEffect, useCallback } from "react";
 import { InputBox, LargeInputBox, SelectBox } from "@/components/Inputs";
+import ReactToPrint, { useReactToPrint } from "react-to-print";
+import { useRef } from "react";
 
 const QUIZ_CONFIG_INITIAL = {
     content: "",
     numQuestions: "3",
     difficulty: "easy",
-    quizName: "",
-};
-
-const QUIZ_INFO_INITIAL = {
-    quizName: "",
+    quizName: "Quiz Name",
 };
 
 export default function CreateQuiz() {
@@ -20,24 +18,38 @@ export default function CreateQuiz() {
     const [content, setContent] = useState("");
     const [quizConfig, setQuizConfig] = useState<any>(QUIZ_CONFIG_INITIAL);
     const [received, setReceived] = useState<any>(false);
-    const [questions, setQuestions] = useState("");
-    const [choices, setChoices] = useState("");
-    const [key, setKey] = useState("");
+    const [questions, setQuestions] = useState([]);
+    const [choices, setChoices] = useState([[]]);
+    const [key, setKey] = useState([]);
     const { complete, completion, setCompletion, isLoading } = useCompletion({
         api: "/api/standardQuiz",
     });
 
+    const testObj = `{
+  "questions": [
+    "How many times a year do most penguin species breed?",
+    "Which penguin species breeds twice in three years?"
+  ],
+  "choices": [
+    ["A. Once", "B. Twice", "C. Three times"],
+    ["A. African penguin", "B. Emperor penguin", "C. King penguin"]
+  ],
+  "answers": ["B", "C"]
+}`;
+
     const submitContent = useCallback(
         async (config: any) => {
-            const completion = await complete(config);
+            // const completion = await complete(config);
 
-            if (!completion) throw new Error("Completion didn't work");
+            // if (!completion) throw new Error("Completion didn't work");
+            const completion = testObj;
             console.log("string version:");
             console.log(completion);
-            const compList = completion.split(/\r?\n/);
-            const cutCompList = compList.slice(1, compList.length - 1);
+            // const compList = completion.split(/\r?\n/);
+            // const cutCompList = compList.slice(1, compList.length - 1);
 
-            const completionObj = JSON.parse(cutCompList.join(""));
+            // const completionObj = JSON.parse(cutCompList.join(""));
+            const completionObj = JSON.parse(testObj);
 
             console.log(completionObj);
 
@@ -62,6 +74,7 @@ export default function CreateQuiz() {
         submitContent(quizString);
     };
 
+    const componentRef = useRef(null);
     return (
         <div className="bg-[#ececec] min-h-screen px-8 py-3">
             {/* Title */}
@@ -89,7 +102,7 @@ export default function CreateQuiz() {
                                 name="quizName"
                                 placeholder="AP Euro Quiz 2"
                                 type="text"
-                                value={quizConfig.name}
+                                value={quizConfig.quizName}
                                 handleChange={handleChange}
                             />
                             <SelectBox
@@ -140,21 +153,62 @@ export default function CreateQuiz() {
             {!received ? (
                 <></>
             ) : (
-                <>
-                    <div>
-                        <h1>{quizConfig.quizName}</h1>
-                        <div>1. {questions[0]}</div>
-                        <ul>
-                            <li>{choices[0][0]}</li>
-                            <li>{choices[0][1]}</li>
-                            <li>{choices[0][2]}</li>
-                        </ul>
-                        <div>Answer: {key[0]}</div>
+                <div className="px-8 mt-10">
+                    <ReactToPrint
+                        trigger={() => {
+                            return <a href="#">Print this out!</a>;
+                        }}
+                        content={() => componentRef.current}
+                    />
+                    <div className="px-16 rounded-xl">
+                        <div
+                            ref={componentRef}
+                            className="bg-[#fefefe] px-12 py-8 rounded-xl font-tinos  min-h-[60rem]"
+                        >
+                            {/* HEADER SECTION */}
+                            <div className="flex flex-row justify-between font-semibold ">
+                                <h1 className="w-1/3">Name:</h1>
+                                <h1 className="w-1/3 text-center ">
+                                    AP European History
+                                </h1>
+                                <h1 className="w-1/3 text-center">
+                                    Version: A
+                                </h1>
+                            </div>
+                            {/* TITLE */}
+                            <div className="text-xl font-semibold my-7">
+                                {quizConfig.quizName}
+                            </div>
+                            {/* DESCRIPTION */}
+                            <h1 className="font-semibold text-lg">
+                                Multiple Choice
+                            </h1>
+                            <div className="italic mb-3">
+                                Identify the choice that best completes the
+                                statement or answers the question
+                            </div>
+
+                            {/* QUESTIONS */}
+                            {questions.map((question, index) => (
+                                <div className="px-8 mb-3">
+                                    <h1>
+                                        {index + 1}. {question}
+                                    </h1>
+                                    <div className="ml-5 ">
+                                        {choices[0].map((choice, index) => (
+                                            <div>{choice}</div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+
+                            <div className="mt-20">Answer: {key[0]}</div>
+                        </div>
                     </div>
                     <div>{questions}</div>
                     <div>{choices}</div>
                     <div>{key}</div>
-                </>
+                </div>
             )}
         </div>
     );

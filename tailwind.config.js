@@ -9,6 +9,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 outfit: ["Outfit", "sans-serif"],
+                tinos: ["Tinos", "sans-serif"],
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
