@@ -27,6 +27,7 @@ export interface InputTypes {
     statusCompleted?: boolean;
     value: string;
     handleChange: any;
+    rows?: number;
 }
 
 export interface SelectTypes {

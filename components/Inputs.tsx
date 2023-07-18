@@ -74,21 +74,24 @@ export function LargeInputBox({
     value,
     handleChange,
     statusCompleted,
+    rows,
 }: InputTypes) {
     return (
         <div className=" flex flex-col   ">
             <label className="">
-                <span className="font-[250] text-sm ">{label}</span>
+                <span className="font-medium text-zinc-500 text-sm ">
+                    {label}
+                </span>
             </label>
             <textarea
                 className={` bg-[#fefefe]
-               border py-4 px-5 rounded-xl shadow-md resize-none }
+               border py-4 px-5 rounded-xl resize-none }
                 ${statusCompleted ? "" : ""}  `}
                 name={name}
                 placeholder={placeholder}
                 onChange={handleChange}
                 required={true}
-                rows={19}
+                rows={rows}
                 value={value}
             />
         </div>

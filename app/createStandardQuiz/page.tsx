@@ -4,7 +4,9 @@ import { useCompletion } from "ai/react";
 import { useState, useEffect, useCallback } from "react";
 import { InputBox, LargeInputBox, SelectBox } from "@/components/Inputs";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
+import QuestionItem from "@/components/QuestionItem";
 import { useRef } from "react";
+import Link from "next/link";
 
 const QUIZ_CONFIG_INITIAL = {
     content: "",
@@ -14,8 +16,6 @@ const QUIZ_CONFIG_INITIAL = {
 };
 
 export default function CreateQuiz() {
-    // Locally store our blog posts content
-    const [content, setContent] = useState("");
     const [quizConfig, setQuizConfig] = useState<any>(QUIZ_CONFIG_INITIAL);
     const [received, setReceived] = useState<any>(false);
     const [questions, setQuestions] = useState([]);
@@ -25,31 +25,43 @@ export default function CreateQuiz() {
         api: "/api/standardQuiz",
     });
 
-    const testObj = `{
+    const testObj = `json\n
+{
   "questions": [
-    "How many times a year do most penguin species breed?",
-    "Which penguin species breeds twice in three years?"
+    "What does the report suggest about the current marine park around Macquarie Island?",
+    "According to the report, what is the most sensible approach for protecting the area's unique ecosystems?",
+    "What are the main direct human impacts in the area?",
+    "What is the target of the current fishery in the central zone of the Macquarie Ridge?",
+    "What would be precluded under the proposed protection zones?"
   ],
   "choices": [
-    ["A. Once", "B. Twice", "C. Three times"],
-    ["A. African penguin", "B. Emperor penguin", "C. King penguin"]
+    ["A. It adequately represents the entire area around Macquarie Island.", "B. It protects the entire Macquarie Ridge.", "C. It does not adequately protect certain areas around Macquarie Island."],
+    ["A. Declaring the entire area around the Macquarie Ridge as a marine park.", "B. Expanding the current sanctuary zone.", "C. Completely banning fishing in the area."],
+    ["A. Fishing and marine debris.", "B. Climate change and seabed mining.", "C. Fishing and climate change."],
+    ["A. Patagonian toothfish.", "B. Midwater species.", "C. Seabirds and marine mammals."],
+    ["A. Fishing and mining.", "B. Fishing and seabirds.", "C. Mining and marine mammals."]
   ],
-  "answers": ["B", "C"]
-}`;
+  "answers": ["C", "A", "A", "A", "A"]
+}\n
+`;
 
     const submitContent = useCallback(
         async (config: any) => {
-            // const completion = await complete(config);
+            const completion = await complete(config);
 
-            // if (!completion) throw new Error("Completion didn't work");
-            const completion = testObj;
+            if (!completion) throw new Error("Completion didn't work");
+            // const completion = testObj;
             console.log("string version:");
             console.log(completion);
-            // const compList = completion.split(/\r?\n/);
-            // const cutCompList = compList.slice(1, compList.length - 1);
+            const compList = completion.split(/\r?\n/);
+            const cutCompList = compList.slice(1, compList.length - 2);
+            console.log("cutCompList:");
+            console.log(cutCompList);
+            console.log("JOINED cutCompList:");
+            console.log(cutCompList.join("").trim());
 
-            // const completionObj = JSON.parse(cutCompList.join(""));
-            const completionObj = JSON.parse(testObj);
+            const completionObj = JSON.parse(cutCompList.join("").trim());
+            // const completionObj = JSON.parse(testObj);
 
             console.log(completionObj);
 
@@ -60,6 +72,26 @@ export default function CreateQuiz() {
         },
         [complete]
     );
+    const handleQuestionChange = (
+        editedQuestion: never,
+        editedChoices: never,
+        editedAnswer: never,
+        currIndex: number
+    ) => {
+        // Create a new array with the updated question, choices, and answer
+        const newQuestions = [...questions];
+
+        const newChoices = [...choices];
+        const newAnswer = [...key];
+
+        newQuestions[currIndex] = editedQuestion;
+        newChoices[currIndex] = editedChoices;
+        newAnswer[currIndex] = editedAnswer;
+
+        setQuestions(newQuestions);
+        setChoices(newChoices);
+        setKey(newAnswer);
+    };
 
     const handleChange = (e: any) => {
         setQuizConfig((prevState: any) => ({
@@ -79,7 +111,10 @@ export default function CreateQuiz() {
         <div className="bg-[#ececec] min-h-screen px-8 py-3">
             {/* Title */}
             <div className="flex flex-row items-end space-x-2 ">
-                <h1 className="font-outfit text-[2.1rem]">🍐 Pear</h1>
+                <Link href={"/demo"}>
+                    <h1 className="font-outfit text-[2.1rem]">🍐 Pear</h1>
+                </Link>
+
                 <p className="font-semibold">Quiz Generator</p>
             </div>
 
@@ -93,6 +128,8 @@ export default function CreateQuiz() {
                             type="text"
                             value={quizConfig.content}
                             handleChange={handleChange}
+                            rows={18}
+                            className="shadow-md"
                         />
                     </div>
                     <div className="w-5/12 flex flex-col justify-between bg-[#fefefe] shadow-md  py-5 px-7 rounded-xl ">
@@ -154,13 +191,76 @@ export default function CreateQuiz() {
                 <></>
             ) : (
                 <div className="px-8 mt-10">
-                    <ReactToPrint
-                        trigger={() => {
-                            return <a href="#">Print this out!</a>;
-                        }}
-                        content={() => componentRef.current}
-                    />
-                    <div className="px-16 rounded-xl">
+                    {/* RAW SECTION */}
+                    <div className="mb-10">
+                        <h1 className="text-2xl mb-1 font-medium">
+                            Quiz Editor
+                        </h1>
+                        <p className="w-6/12 mb-8">
+                            Note: You can edit all the questions, choices, and
+                            answers by just clicking on them and typing it
+                            yourself. Below this you will have the option to
+                            either share the quiz with your students as a link
+                            or print it out
+                        </p>
+                        <div className="bg-[#fefefe] px-12 py-8 rounded-xl mx-16 space-y-14">
+                            {questions.map((question, index) => (
+                                <div key={index + question}>
+                                    <QuestionItem
+                                        key={index}
+                                        question={question}
+                                        choices={choices[index]}
+                                        answer={key[index]}
+                                        onChange={handleQuestionChange}
+                                        currIndex={index}
+                                    />
+                                </div>
+                            ))}
+                            <div>
+                                <h1 className="font-semibold">Answer Key:</h1>
+                                <div className="flex flex-row space-x-1">
+                                    {key.map((answer, index) => (
+                                        <div key={answer + index}>{answer}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* SHARE SECTION */}
+                    <div className="mb-10">
+                        <h1 className="text-2xl mb-1 font-medium">
+                            Share Quiz
+                        </h1>
+                        <div className="flex gap-5">
+                            <button
+                                // onClick={handleSubmit}
+                                className={`inline-block text-white tracking-wider text-center max-w-fit bg-black
+        font-normal text-sm transition ease-in-out duration-100
+      box-content hover:scale-105 my-0 px-[43px] py-[10px]`}
+                            >
+                                Share as link
+                            </button>
+                            <div
+                                className={`inline-block text-white tracking-wider text-center max-w-fit bg-black
+        font-normal text-sm transition ease-in-out duration-100
+      box-content hover:scale-105 my-0 px-[43px] py-[10px]`}
+                            >
+                                <ReactToPrint
+                                    trigger={() => {
+                                        return <a href="#">Print it out</a>;
+                                    }}
+                                    content={() => componentRef.current}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* PRINT SECTION */}
+
+                    <h1 className="text-2xl mb-1 font-medium">Print Preview</h1>
+
+                    <div className="px-16 rounded-xl mb-10">
                         <div
                             ref={componentRef}
                             className="bg-[#fefefe] px-12 py-8 rounded-xl font-tinos  min-h-[60rem]"
@@ -190,24 +290,24 @@ export default function CreateQuiz() {
 
                             {/* QUESTIONS */}
                             {questions.map((question, index) => (
-                                <div className="px-8 mb-3">
+                                <div
+                                    key={index + question}
+                                    className="px-8 mb-3"
+                                >
                                     <h1>
                                         {index + 1}. {question}
                                     </h1>
                                     <div className="ml-5 ">
-                                        {choices[0].map((choice, index) => (
-                                            <div>{choice}</div>
+                                        {choices[index].map((choice, index) => (
+                                            <div key={choice + index}>
+                                                {choice}
+                                            </div>
                                         ))}
                                     </div>
                                 </div>
                             ))}
-
-                            <div className="mt-20">Answer: {key[0]}</div>
                         </div>
                     </div>
-                    <div>{questions}</div>
-                    <div>{choices}</div>
-                    <div>{key}</div>
                 </div>
             )}
         </div>

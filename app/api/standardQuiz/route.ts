@@ -17,7 +17,7 @@ export async function POST(req: Request) {
         questions:
             "list containing every question. Ex: [Question 1, Question 2, etc.]",
         choices:
-            "list containing a list for each question's 3 possible answer choices",
+            "list containing a list for each question's 3 possible answer choices labeled A, B, or C",
         answers:
             "list containing letters to each question's correct letter answer",
     });

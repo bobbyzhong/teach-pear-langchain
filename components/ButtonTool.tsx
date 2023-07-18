@@ -12,7 +12,7 @@ export default function ToolLink({
     href: any;
     children: any;
 }) {
-    const [modalOpen, setModalOpen] = useState<any>(true);
+    const [modalOpen, setModalOpen] = useState<any>(false);
 
     return (
         <div>
@@ -50,7 +50,10 @@ export default function ToolLink({
                                         />
                                     </div>
                                 </Link>
-                                <div className="w-full flex items-center gap-3 mb-3">
+                                <Link
+                                    href={"/createTextbookQuiz"}
+                                    className="w-full flex items-center gap-3 mb-3"
+                                >
                                     <p className="text-base">Textbook</p>
                                     <div className="w-10 h-10">
                                         <Image
@@ -60,7 +63,7 @@ export default function ToolLink({
                                             alt={"arrow"}
                                         />
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         </div>
                     </div>
