@@ -10,7 +10,7 @@ import Link from "next/link";
 
 const QUIZ_CONFIG_INITIAL = {
     content: "",
-    numQuestions: "3",
+    numQuestions: "1",
     difficulty: "easy",
     quizName: "Quiz Name",
 };
@@ -21,6 +21,7 @@ export default function CreateQuiz() {
     const [questions, setQuestions] = useState([]);
     const [choices, setChoices] = useState([[]]);
     const [key, setKey] = useState([]);
+    const [loading, setLoading] = useState<any>(false);
     const { complete, completion, setCompletion, isLoading } = useCompletion({
         api: "/api/standardQuiz",
     });
@@ -45,33 +46,61 @@ export default function CreateQuiz() {
 }\n
 `;
 
-    const submitContent = useCallback(
-        async (config: any) => {
-            const completion = await complete(config);
+    // const submitContent = useCallback(
+    //     async (config: any) => {
+    //         const completion = await complete(config);
 
-            if (!completion) throw new Error("Completion didn't work");
-            // const completion = testObj;
-            console.log("string version:");
-            console.log(completion);
-            const compList = completion.split(/\r?\n/);
-            const cutCompList = compList.slice(1, compList.length - 2);
-            console.log("cutCompList:");
-            console.log(cutCompList);
-            console.log("JOINED cutCompList:");
-            console.log(cutCompList.join("").trim());
+    //         if (!completion) throw new Error("Completion didn't work");
+    //         // const completion = testObj;
+    //         console.log("string version:");
+    //         console.log(completion);
 
-            const completionObj = JSON.parse(cutCompList.join("").trim());
-            // const completionObj = JSON.parse(testObj);
+    //         const compList = completion.split(/\r?\n/);
+    //         console.log(compList);
+    //         const cutCompList = compList.slice(1, compList.length - 1);
 
-            console.log(completionObj);
+    //         console.log("cutCompList:");
+    //         console.log(cutCompList);
+    //         console.log("JOINED cutCompList:");
+    //         console.log(cutCompList.join("").trim());
 
-            setQuestions(completionObj.questions);
-            setChoices(completionObj.choices);
-            setKey(completionObj.answers);
-            setReceived(true);
-        },
-        [complete]
-    );
+    //         const completionObj = JSON.parse(cutCompList.join("").trim());
+    //         // const completionObj = JSON.parse(jsonString);
+    //         // const completionObj = JSON.parse(testObj);
+
+    //         console.log(completionObj);
+
+    // setQuestions(completionObj.questions);
+    // setChoices(completionObj.choices);
+    // setKey(completionObj.answers);
+    // setReceived(true);
+    //     },
+    //     [complete]
+    // );
+    const handleSubmit = async (e: any) => {
+        setLoading(true);
+        const res = await fetch("/api/standardQuiz", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                numQuestions: quizConfig.numQuestions,
+                difficulty: quizConfig.difficulty,
+                content: quizConfig.content,
+            }),
+        });
+        const responseData = await res.json();
+        const completion = responseData.res;
+        console.log("STRING VERSION");
+        console.log(completion);
+        const completionObj = JSON.parse(completion);
+        setLoading(false);
+        setQuestions(completionObj.questions);
+        setChoices(completionObj.choices);
+        setKey(completionObj.answers);
+        setReceived(true);
+    };
     const handleQuestionChange = (
         editedQuestion: never,
         editedChoices: never,
@@ -103,7 +132,7 @@ export default function CreateQuiz() {
 
     const requestQuiz = () => {
         let quizString = JSON.stringify(quizConfig);
-        submitContent(quizString);
+        handleSubmit(quizString);
     };
 
     const componentRef = useRef(null);
@@ -174,7 +203,7 @@ export default function CreateQuiz() {
                                 name="difficulty"
                             />
                         </div>
-                        {isLoading ? (
+                        {loading ? (
                             <div>
                                 <h1>Loading...</h1>
                             </div>

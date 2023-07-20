@@ -22,6 +22,12 @@ export default function QuestionItem({
         onChange(editedQuestion, editedChoices, editedAnswer, editedIndex);
     };
 
+    const handleEditChoice = (e: any, index: any) => {
+        const newChoices = [...editedChoices];
+        newChoices[index] = e.target.value;
+        setEditedChoices(newChoices);
+    };
+
     return (
         <div>
             <div className="flex flex-col mb-3">
@@ -45,11 +51,7 @@ export default function QuestionItem({
                             key={index}
                             type="text"
                             value={choice}
-                            onChange={(e) => {
-                                const newChoices = [...editedChoices];
-                                newChoices[index] = e.target.value;
-                                setEditedChoices(newChoices);
-                            }}
+                            onChange={(e) => handleEditChoice(e, index)}
                             className="w-full"
                         />
                     </div>
