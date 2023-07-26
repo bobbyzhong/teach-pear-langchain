@@ -16,6 +16,14 @@ const QUIZ_CONFIG_INITIAL = {
     chapters: "",
 };
 
+const NEW_QUESTION_INITIAL = {
+    question: "",
+    a: "",
+    b: "",
+    c: "",
+    answer: "",
+};
+
 export default function PineconePage() {
     const [query, setQuery] = useState("");
     const [result, setResult] = useState("");
@@ -23,9 +31,10 @@ export default function PineconePage() {
 
     const [quizConfig, setQuizConfig] = useState<any>(QUIZ_CONFIG_INITIAL);
     const [received, setReceived] = useState<any>(false);
-    const [questions, setQuestions] = useState([]);
-    const [choices, setChoices] = useState([[]]);
-    const [key, setKey] = useState([]);
+    const [questions, setQuestions] = useState<any>([]);
+    const [choices, setChoices] = useState<any>([[]]);
+    const [newQuestion, setNewQuestion] = useState<any>(NEW_QUESTION_INITIAL);
+    const [key, setKey] = useState<any>([]);
 
     // async function createIndexAndEmneddings() {
     //     try {
@@ -79,6 +88,13 @@ export default function PineconePage() {
         console.log(quizConfig);
     };
 
+    const handleAddQuestion = (e: any) => {
+        setNewQuestion((prevState: any) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
     const handleQuestionChange = (
         editedQuestion: never,
         editedChoices: never,
@@ -98,6 +114,12 @@ export default function PineconePage() {
         setQuestions(newQuestions);
         setChoices(newChoices);
         setKey(newAnswer);
+    };
+
+    const addQuestion = () => {
+        setQuestions([...questions, newQuestion.question]);
+        setChoices([...choices, [newQuestion.a, newQuestion.b, newQuestion.c]]);
+        setKey([...key, newQuestion.answer]);
     };
 
     const requestQuiz = () => {
@@ -234,25 +256,80 @@ export default function PineconePage() {
                             either share the quiz with your students as a link
                             or print it out
                         </p>
-                        <div className="bg-[#fefefe] px-12 py-8 rounded-xl mx-16 space-y-14">
-                            {questions.map((question, index) => (
-                                <div key={index + question}>
-                                    <QuestionItem
-                                        key={index}
-                                        question={question}
-                                        choices={choices[index]}
-                                        answer={key[index]}
-                                        onChange={handleQuestionChange}
-                                        currIndex={index}
-                                    />
+                        <div className="flex flex-row gap-10">
+                            <div className="bg-[#fefefe] px-12 py-8 rounded-xl w-1/2 ml-16 space-y-14">
+                                {questions.map((question: any, index: any) => (
+                                    <div key={index + question}>
+                                        <QuestionItem
+                                            key={index}
+                                            question={question}
+                                            choices={choices[index]}
+                                            answer={key[index]}
+                                            onChange={handleQuestionChange}
+                                            currIndex={index}
+                                        />
+                                    </div>
+                                ))}
+
+                                <div>
+                                    <h1 className="font-semibold">
+                                        Answer Key:
+                                    </h1>
+                                    <div className="flex flex-row space-x-1">
+                                        {key.map((answer: any, index: any) => (
+                                            <div key={answer + index}>
+                                                {answer}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                            ))}
-                            <div>
-                                <h1 className="font-semibold">Answer Key:</h1>
-                                <div className="flex flex-row space-x-1">
-                                    {key.map((answer, index) => (
-                                        <div key={answer + index}>{answer}</div>
-                                    ))}
+                            </div>
+                            <div className="bg-[#fefefe] px-12 py-8 rounded-xl w-1/2 mr-16 space-y-14">
+                                <h1>Add Question</h1>
+                                <div>
+                                    <InputBox
+                                        label="Question"
+                                        name="question"
+                                        placeholder="Who were part of the Allies in WW2"
+                                        type="text"
+                                        value={newQuestion.question}
+                                        handleChange={handleAddQuestion}
+                                    />
+                                    <InputBox
+                                        label="Choice A"
+                                        name="a"
+                                        placeholder="Japan"
+                                        type="text"
+                                        value={newQuestion.a}
+                                        handleChange={handleAddQuestion}
+                                    />
+                                    <InputBox
+                                        label="Choice B"
+                                        name="b"
+                                        placeholder="Britain"
+                                        type="text"
+                                        value={newQuestion.b}
+                                        handleChange={handleAddQuestion}
+                                    />
+                                    <InputBox
+                                        label="Choice C"
+                                        name="c"
+                                        placeholder="Italy"
+                                        type="text"
+                                        value={newQuestion.c}
+                                        handleChange={handleAddQuestion}
+                                    />
+                                    <InputBox
+                                        label="Answer"
+                                        name="answer"
+                                        placeholder="b"
+                                        type="text"
+                                        value={newQuestion.answer}
+                                        handleChange={handleAddQuestion}
+                                    />
+                                    <button onClick={addQuestion}>
+                                        Add question
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -320,7 +397,7 @@ export default function PineconePage() {
                             </div>
 
                             {/* QUESTIONS */}
-                            {questions.map((question, index) => (
+                            {questions.map((question: any, index: any) => (
                                 <div
                                     key={index + question}
                                     className="px-8 mb-3"
@@ -329,12 +406,14 @@ export default function PineconePage() {
                                         {index + 1}. {question}
                                     </h1>
                                     <div className="ml-5 ">
-                                        <div>{choices[index]}</div>
-                                        {/* {choices[index].map((choice, index) => (
-                                            <div key={choice + index}>
-                                                {choice}
-                                            </div>
-                                        ))} */}
+                                        {/* <div>{choices[index]}</div> */}
+                                        {choices[index].map(
+                                            (choice: any, index: any) => (
+                                                <div key={choice + index}>
+                                                    {choice}
+                                                </div>
+                                            )
+                                        )}
                                     </div>
                                 </div>
                             ))}

@@ -3,7 +3,7 @@
 import { useCompletion } from "ai/react";
 import { useState, useEffect, useCallback } from "react";
 import { InputBox, LargeInputBox, SelectBox } from "@/components/Inputs";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
+import ReactToPrint from "react-to-print";
 import QuestionItem from "@/components/QuestionItem";
 import { useRef } from "react";
 import Link from "next/link";
@@ -46,37 +46,6 @@ export default function CreateQuiz() {
 }\n
 `;
 
-    // const submitContent = useCallback(
-    //     async (config: any) => {
-    //         const completion = await complete(config);
-
-    //         if (!completion) throw new Error("Completion didn't work");
-    //         // const completion = testObj;
-    //         console.log("string version:");
-    //         console.log(completion);
-
-    //         const compList = completion.split(/\r?\n/);
-    //         console.log(compList);
-    //         const cutCompList = compList.slice(1, compList.length - 1);
-
-    //         console.log("cutCompList:");
-    //         console.log(cutCompList);
-    //         console.log("JOINED cutCompList:");
-    //         console.log(cutCompList.join("").trim());
-
-    //         const completionObj = JSON.parse(cutCompList.join("").trim());
-    //         // const completionObj = JSON.parse(jsonString);
-    //         // const completionObj = JSON.parse(testObj);
-
-    //         console.log(completionObj);
-
-    // setQuestions(completionObj.questions);
-    // setChoices(completionObj.choices);
-    // setKey(completionObj.answers);
-    // setReceived(true);
-    //     },
-    //     [complete]
-    // );
     const handleSubmit = async (e: any) => {
         setLoading(true);
         const res = await fetch("/api/standardQuiz", {
