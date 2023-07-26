@@ -7,7 +7,7 @@ import { useAuth } from "../components/AuthProvider";
 import { InputBox, LargeInputBox } from "@/components/Inputs";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { UserDataTypes } from "../../types/types";
+import { UserDataTypes } from "@/types/types";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import React from "react";
