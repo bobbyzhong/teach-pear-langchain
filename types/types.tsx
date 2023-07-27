@@ -45,18 +45,8 @@ export interface UserDataTypes {
     email: string;
     f_name: string;
     l_name: string;
-    phone: string;
-    city: string;
-    company: string;
-    employment: string;
-    languages: string;
-    bio: string;
-    interests: string;
-    why: string;
-    one_hour: string;
-    two_hour: string;
-    three_hour: string;
-    five_hour: string;
+    school: string;
+    students: any;
 }
 export interface VehicleDataTypes {
     owner_id: string;

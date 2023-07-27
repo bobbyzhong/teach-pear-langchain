@@ -33,3 +33,18 @@
         @apply w-full mb-5 rounded-full py-2 bg-cyan-400 text-white hover:bg-white hover:text-cyan-400 hover:border-2 hover:border-cyan-400;
     }
 }
+
+@layer utilities {
+    @variants responsive {
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+    }
+}
