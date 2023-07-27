@@ -6,7 +6,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import supabase from "../app/supabase-browser";
 import VertNav from "@/components/VertNav";
 import StatsBar from "@/components/StatsBar";
-import Toolbox from "@/components/Toolbox";
 import Notifications from "@/components/Notifications";
 import SignOut from "./SignOut";
 import Button from "./Button";
