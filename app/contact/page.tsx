@@ -23,7 +23,7 @@ export default function Page() {
                             CONTACT US VIA EMAIL
                         </h1>
                         <div className="text-lighterGray lg:text-5xl text-4xl w-fit flex flex-col items-end tracking-[0.03em] ">
-                            moonwishstudios
+                            3bobbyzhong3
                             <div className="text-sm font-medium text-lighterGray">
                                 @gmail.com
                             </div>
