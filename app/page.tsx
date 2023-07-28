@@ -23,22 +23,22 @@ export default function HomePage() {
                     className="TEXT SECTION lg:w-7/12 w-full lg:ml-20 py-[10rem] flex flex-col lg:items-start lg:text-start 
              justify-center items-center text-center"
                 >
-                    <div className="text-5xl font-semibold w-10/12 tracking-[0.02rem] leading-[3.8rem] text-gray-200 lg:text-black ">
+                    <div className="text-4xl sm:text-5xl font-semibold sm:w-10/12 w-11/12 tracking-[0.02rem] sm:leading-[3.8rem] -mt-20 leading-[2.8rem] text-white1 lg:text-black ">
                         Pear helps with the busy work so you can focus on the
                         human side of teaching
                     </div>
-                    <div className="text-[1.2rem] text-gray-200  lg:text-zinc-700 w-8/12 my-8">
+                    <div className="sm:text-[1.3rem] text-[1.2rem] text-white1  lg:text-zinc-700 w-10/12 sm:w-8/12 my-8">
                         Easily create custom teaching material such as quizzes,
                         worksheets, and handouts using AI through Pear
                     </div>
-                    <div className="text-[1rem] text-gray-200  lg:text-zinc-700 w-8/12 mb-3">
+                    <div className="text-[1rem] text-white1  lg:text-zinc-700 w-8/12 mb-3">
                         Enter your email to try out beta!
                     </div>
                     <div className="flex sm:flex-row gap-2 flex-col items-center ">
                         <div className=" flex flex-col ">
                             <input
                                 className={`
-               border-b py-2 px-4 w-[16.5rem] bg-transparent placeholder:text-gray-700  tracking-wider outline-none border-gray-200 lg:border-zinc-700 lg:text-zinc-700
+               border-b py-2 px-4 w-[16.5rem] bg-transparent lg:placeholder:text-gray-700 placeholder:text-white1  tracking-wider outline-none border-gray-200 lg:border-zinc-700 lg:text-zinc-700
                  `}
                                 type="text"
                                 name="email"
@@ -51,7 +51,7 @@ export default function HomePage() {
 
                         <button
                             // onClick={handleSubmit}
-                            className={`inline-block text-white tracking-wider text-center max-w-fit bg-black
+                            className={`inline-block text-white tracking-wider text-center max-w-fit lg:bg-black bg-green
         font-normal text-sm transition ease-in-out duration-100
       box-content hover:scale-105 my-0 px-[43px] py-[10px]`}
                         >
