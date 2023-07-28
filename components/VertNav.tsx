@@ -21,37 +21,46 @@ export default function VertNav() {
             </div>
             <div className="flex flex-col h-full justify-between ml-8">
                 <div className="">
-                    <h2 className="mt-5 mb-8 text-zinc-400 font-[650] tracking-tight text-[12px]">
+                    <h2 className="mt-5 mb-8 text-zinc-400 font-[650]  text-[11.5px]">
                         GENERAL
                     </h2>
-                    <div className="space-y-7 tracking-wide text-zinc-600">
-                        <div className="flex flex-row items-center gap-3">
+                    <div className="space-y-7 tracking-wide text-zinc-600 ">
+                        <Link
+                            href={"/dashboard"}
+                            className="flex flex-row items-center gap-3"
+                        >
                             <Image
                                 src={"/assets/icons/dashboard.svg"}
-                                height={25}
-                                width={25}
+                                height={20}
+                                width={20}
                                 alt={"dash"}
                             />
-                            <p>Dashboard</p>
-                        </div>
-                        <div className="flex flex-row items-center gap-3">
+                            <p className="text-sm">Dashboard</p>
+                        </Link>
+                        <Link
+                            href={"/dashboard/profile"}
+                            className="flex flex-row items-center gap-3"
+                        >
                             <Image
                                 src={"/assets/icons/profile.svg"}
                                 height={25}
                                 width={25}
                                 alt={"dash"}
                             />
-                            <p>Profile</p>
-                        </div>
-                        <div className="flex flex-row items-center gap-3">
+                            <p className="text-sm">Profile</p>
+                        </Link>
+                        <Link
+                            href={"/dashboard/students"}
+                            className="flex flex-row items-center gap-3"
+                        >
                             <Image
                                 src={"/assets/icons/students.svg"}
                                 height={25}
                                 width={25}
                                 alt={"dash"}
                             />
-                            <p>Students</p>
-                        </div>
+                            <p className="text-sm">Students</p>
+                        </Link>
                     </div>
                 </div>
                 {/* <div className="flex flex-row items-center ml-10 space-x-2 pb-5">

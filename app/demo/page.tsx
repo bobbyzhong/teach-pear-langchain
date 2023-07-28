@@ -1,25 +1,16 @@
 "use client";
-import VertNav from "@/components/VertNav";
-import Image from "next/image";
-import StatsBar from "@/components/StatsBar";
-
-import Notifications from "@/components/Notifications";
+import Navbar from "@/components/Navbar";
 
 export default function DemoPage() {
     return (
         <div>
-            <div className="bg-[#ececec] ">
-                <div className="MAIN CONTAINER   flex flex-row gap-9">
-                    <VertNav />
-                    <div className="pt-[2.8rem] mr-[2.2rem]  flex flex-row gap-9">
-                        <div className="w-8/12 flex flex-col gap-9">
-                            <StatsBar />
-                        </div>
-                        <div className="w-4/12">
-                            <Notifications />
-                        </div>
-                    </div>
-                </div>
+            <Navbar />
+            <div className="bg-white1 flex items-center justify-center">
+                <iframe
+                    width={1200}
+                    height={800}
+                    src="https://calendly.com/bobbyzhong/30min"
+                ></iframe>
             </div>
         </div>
     );

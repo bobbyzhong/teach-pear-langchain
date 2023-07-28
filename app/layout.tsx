@@ -10,6 +10,7 @@ export const metadata = {
     title: "Teach with Pear",
     description:
         "Pear helps with the busy work so you can focus on the human side of teaching",
+    icon: "/assets/icons/pearemoji.png",
 };
 
 export default async function RootLayout({
@@ -26,6 +27,13 @@ export default async function RootLayout({
 
     return (
         <html lang="en">
+            <meta
+                content="width=device-width, initial-scale=1"
+                name="viewport"
+            />
+            <meta name="description" content="Teach with Pear" />
+            <meta property="og:image" content="/landing.png" />
+            <link rel="icon" href="/assets/icons/pearemoji.png" />
             <body className={inter.className}>
                 {" "}
                 <AuthProvider accessToken={accessToken}>

@@ -61,7 +61,7 @@ export function Dashboard(user: any) {
                     <div className="absolute w-full">
                         <DashNav userInfo={userData} />
                     </div>
-                    <div className="MAIN CONTAINER bg-gray1 flex flex-row h-[200rem] ">
+                    <div className="MAIN CONTAINER bg-gray1 flex flex-row ">
                         <VertNav />
 
                         <div className="pt-[5.5rem] flex flex-col gap-9 ">
@@ -136,7 +136,7 @@ export function Dashboard(user: any) {
                                 <div className="w-1/3 pr-4">
                                     <Notifications />
                                 </div>
-                                <div className="flex w-2/3 flex-col ml-4">
+                                <div className="flex w-2/3 flex-col gap-8 ml-4">
                                     <div className="flex flow-row gap-8 ">
                                         <div className="w-1/2">
                                             <div
@@ -157,7 +157,7 @@ export function Dashboard(user: any) {
                                                     </div>
                                                 </div>
                                                 <div className="w-full flex items-center">
-                                                    <PlainButton>
+                                                    <PlainButton href={""}>
                                                         Continue To Demo
                                                     </PlainButton>
                                                 </div>
@@ -182,9 +182,38 @@ export function Dashboard(user: any) {
                                                     </div>
                                                 </div>
                                                 <div className="w-full flex items-center">
-                                                    <PlainButton>
+                                                    <PlainButton href="/contact">
                                                         Get In Touch
                                                     </PlainButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="w-full">
+                                        <div
+                                            className="w-full flex flex-col text-start bg-white1 border-[1.5px] h-[13.3rem] justify-between
+             border-gray2 p-6 rounded-[5px]"
+                                        >
+                                            <div>
+                                                <h1 className="text-[20px] font-semibold tracking-tight text-zinc-900 border-b-[1.5px] pb-3 border-gray2 mb-3">
+                                                    Heads Up!
+                                                </h1>
+                                                <div className="leading-[1.5rem] text-[15px] font-[350] text-zinc-700">
+                                                    We are still early in
+                                                    development so might be some
+                                                    bugs and errors sometimes.
+                                                    However, the team at Pear is
+                                                    working hard to make sure to
+                                                    create the best possible
+                                                    experience for teachers and
+                                                    we are constantly working on
+                                                    new features. Also, AI, like
+                                                    humans, can also mess up
+                                                    sometimes so just make sure
+                                                    to look over the content you
+                                                    create and please let us
+                                                    know if there are any large
+                                                    issues!
                                                 </div>
                                             </div>
                                         </div>

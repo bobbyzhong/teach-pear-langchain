@@ -23,7 +23,7 @@ export default function Navbar({ className }: { className?: string }) {
 
     return (
         <div
-            className={`${transparent} font-outfit lg:mx-auto bg-none  w-full z-[999] ${className} `}
+            className={`${transparent} font-outfit lg:mx-auto bg-white1  w-full z-[999] ${className} `}
         >
             <div className="flex items-center justify-between py-1 ">
                 {/* Logo */}
@@ -66,10 +66,11 @@ export default function Navbar({ className }: { className?: string }) {
            -translate-y-16  flex flex-col gap-2 z-50 p-4 w-[80%] text-black font-bold rounded-lg`}
                 >
                     <NavLink
-                        href="/contact"
-                        text="Demo"
+                        href="/login"
+                        text="Login"
                         currentPath={pathname}
                     />
+                    <NavLink href="/demo" text="Demo" currentPath={pathname} />
                     <NavLink
                         href="/contact"
                         text="Contact us"
@@ -81,10 +82,11 @@ export default function Navbar({ className }: { className?: string }) {
                     className={`items-center hidden md:flex md:flex-row md:gap-3 md:mr-8 `}
                 >
                     <NavLink
-                        href="/contact"
-                        text="Demo"
+                        href="/login"
+                        text="Login"
                         currentPath={pathname}
                     />
+                    <NavLink href="/demo" text="Demo" currentPath={pathname} />
                     <NavLink
                         href="/contact"
                         text="Contact us"

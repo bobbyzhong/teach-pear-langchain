@@ -6,7 +6,7 @@ export default function Button({
     children,
     className,
 }: {
-    href?: string;
+    href?: any;
     children: React.ReactElement<any> | string;
     className?: string;
 }) {
@@ -28,17 +28,17 @@ export function PlainButton({
     className,
     action,
 }: {
-    href?: string;
+    href?: any;
     children: React.ReactElement<any> | string;
     className?: string;
     action?: any;
 }) {
     return (
-        <button
+        <Link
             className={`"mt-8 mr-0 bg-green inline-block text-center max-w-fit
         font-normal text-sm transition ease-in-out duration-100 
       box-content hover:scale-[1.01] tracking-wider rounded-[5px] px-[35px] my-0 py-[10px] ${className} `}
-            onClick={action}
+            href={href}
         >
             <div className="flex flex-row gap-2 items-center">
                 <div className="text-white1">{children}</div>
@@ -50,6 +50,6 @@ export function PlainButton({
                     alt={""}
                 />
             </div>
-        </button>
+        </Link>
     );
 }
