@@ -4,10 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import NavLink from "./NavLink";
+import SignOut from "./SignOut";
 
 export default function VertNav() {
     return (
-        <div className="sticky top-[0] z-[70] border-r  border-gray2 bg-white1 h-screen">
+        <div className="sticky top-[0] z-[50] border-r  border-gray2 bg-white1 h-[98vh]">
             <div className="border-b border-gray2 pr-16">
                 <h1 className="font-outfit">
                     <Link href={"/"}>
@@ -63,15 +64,6 @@ export default function VertNav() {
                         </Link>
                     </div>
                 </div>
-                {/* <div className="flex flex-row items-center ml-10 space-x-2 pb-5">
-                    <Image
-                        src={"/assets/icons/logout.svg"}
-                        height={38}
-                        width={38}
-                        alt={"logout"}
-                    />
-                    <p className="text-zinc-600">Log Out</p>
-                </div> */}
             </div>
         </div>
     );

@@ -19,10 +19,14 @@ module.exports = {
             colors: {
                 white1: "#FDFDFD",
                 green: "#74B805",
+                green2: "#86D20A",
                 gray1: "#EEEEEE",
                 gray2: "#DDDDDD",
             },
         },
     },
-    plugins: [],
+    plugins: [require("daisyui")],
+    daisyui: {
+        themes: [],
+    },
 };

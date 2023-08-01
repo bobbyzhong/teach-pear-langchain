@@ -13,15 +13,15 @@ export function InputBox({
     value,
 }: InputTypes) {
     return (
-        <div className=" flex flex-col">
+        <div className=" flex flex-col w-full ">
             <label className="mb-1">
-                <span className="font-medium text-zinc-500 text-sm">
+                <span className="font-medium text-zinc-500 text-sm ">
                     {label}
                 </span>
             </label>
             <input
                 className={`
-               border-2 py-2 px-4 rounded-lg
+               border-[1.5px] py-2 px-4 rounded-lg focus:border-green2 focus:ring-green2 focus:outline-none
                 ${statusCompleted ? "" : ""}  `}
                 type={type}
                 name={name}
@@ -85,7 +85,7 @@ export function LargeInputBox({
             </label>
             <textarea
                 className={` bg-[#fefefe]
-               border py-4 px-5 rounded-xl resize-none }
+               border-[1.5px] focus:border-green2 focus:ring-green2 focus:outline-none  py-4 px-5 rounded-xl resize-none }
                 ${statusCompleted ? "" : ""}  `}
                 name={name}
                 placeholder={placeholder}
@@ -143,7 +143,7 @@ export function SelectBox({
                 onChange={handleChange}
                 name={name}
                 id="countries"
-                className="border-2 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                className="focus:border-green2 focus:ring-green2 focus:outline-none border-[1.5px] w-full p-2.5 "
             >
                 {options.map((op, index) => (
                     <option key={index} value={op}>

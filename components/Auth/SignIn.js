@@ -4,7 +4,7 @@ import { useState } from "react";
 import cn from "classnames";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-
+import Navbar from "../Navbar";
 import { useAuth, VIEWS } from "../AuthProvider";
 import supabase from "../../app/supabase-browser";
 
@@ -29,80 +29,93 @@ const SignIn = () => {
     }
 
     return (
-        <div className="auth-container">
-            <div className="auth-card">
-                <h2 className="auth-title">Sign In</h2>
-                <Formik
-                    initialValues={{
-                        email: "",
-                        password: "",
-                    }}
-                    validationSchema={SignInSchema}
-                    onSubmit={signIn}
-                >
-                    {({ errors, touched }) => (
-                        <Form className="auth-form">
-                            <label htmlFor="email">Email</label>
-                            <Field
-                                className={cn(
-                                    "auth-input ",
-                                    errors.email && touched.email && "bg-red-50"
-                                )}
-                                id="email"
-                                name="email"
-                                placeholder="example@gmail.com"
-                                type="email"
-                            />
-                            {errors.email && touched.email ? (
-                                <div className="text-red-600">
-                                    {errors.email}
-                                </div>
-                            ) : null}
+        <div>
+            <Navbar />
 
-                            <label htmlFor="email">Password</label>
-                            <Field
-                                className={cn(
-                                    "auth-input",
-                                    errors.password &&
-                                        touched.password &&
-                                        "bg-red-50"
-                                )}
-                                id="password"
-                                name="password"
-                                type="password"
-                            />
-                            {errors.password && touched.password ? (
-                                <div className="text-red-600">
-                                    {errors.password}
-                                </div>
-                            ) : null}
+            <div className="auth-container font-outfit">
+                <div className="auth-card">
+                    <p className="auth-title ">Sign In</p>
+                    <div className="w-full text-center text-[16px] text-zinc-500 font-medium mb-4">
+                        Welcome back! Please enter your details
+                    </div>
 
-                            <button
-                                className="text-cyan-400 w-full "
-                                type="button"
-                                onClick={() =>
-                                    setView(VIEWS.FORGOTTEN_PASSWORD)
-                                }
-                            >
-                                Forgot your password?
-                            </button>
+                    <Formik
+                        initialValues={{
+                            email: "",
+                            password: "",
+                        }}
+                        validationSchema={SignInSchema}
+                        onSubmit={signIn}
+                    >
+                        {({ errors, touched }) => (
+                            <Form className="auth-form">
+                                <label htmlFor="email">Email</label>
+                                <Field
+                                    className={cn(
+                                        "auth-input ",
+                                        errors.email &&
+                                            touched.email &&
+                                            "bg-red-50"
+                                    )}
+                                    id="email"
+                                    name="email"
+                                    placeholder="example@gmail.com"
+                                    type="email"
+                                />
+                                {errors.email && touched.email ? (
+                                    <div className="text-red-600">
+                                        {errors.email}
+                                    </div>
+                                ) : null}
 
-                            <button className="auth-button" type="submit">
-                                Submit
-                            </button>
-                        </Form>
+                                <label htmlFor="email">Password</label>
+                                <Field
+                                    className={cn(
+                                        "auth-input",
+                                        errors.password &&
+                                            touched.password &&
+                                            "bg-red-50"
+                                    )}
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                />
+                                {errors.password && touched.password ? (
+                                    <div className="text-red-600">
+                                        {errors.password}
+                                    </div>
+                                ) : null}
+
+                                <button
+                                    className=" w-full underline text-green"
+                                    type="button"
+                                    onClick={() =>
+                                        setView(VIEWS.FORGOTTEN_PASSWORD)
+                                    }
+                                >
+                                    Forgot your password?
+                                </button>
+
+                                <button className="auth-button" type="submit">
+                                    Submit
+                                </button>
+                            </Form>
+                        )}
+                    </Formik>
+                    {errorMsg && (
+                        <div className="text-red-600 text-center">
+                            {errorMsg}
+                        </div>
                     )}
-                </Formik>
-                {errorMsg && (
-                    <div className="text-red-600 text-center">{errorMsg}</div>
-                )}
-                <button
-                    className="text-cyan-400 w-full"
-                    type="button"
-                    onClick={() => setView(VIEWS.SIGN_UP)}
-                >
-                    Don&apos;t have an account? Sign Up.
-                </button>
+                    <button
+                        className=" w-full"
+                        type="button"
+                        onClick={() => setView(VIEWS.SIGN_UP)}
+                    >
+                        Don&apos;t have an account yet?{" "}
+                        <span className="underline text-green">Create one</span>
+                    </button>
+                </div>
             </div>
         </div>
     );

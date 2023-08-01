@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import Navbar from "./Navbar";
 
 import supabase from "../app/supabase-browser";
 
@@ -79,7 +80,11 @@ export const AuthProvider = (props) => {
         };
     }, [initial, session, user, view]);
 
-    return <AuthContext.Provider value={value} {...rest} />;
+    return (
+        <div>
+            <AuthContext.Provider value={value} {...rest} />
+        </div>
+    );
 };
 
 export const useAuth = () => {

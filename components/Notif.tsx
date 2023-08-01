@@ -7,9 +7,9 @@ export default function Notif() {
             <div className="w-full flex flex-row   pt-5 pb-3  rounded-md justify-start">
                 <div className="flex flex-row ">
                     <Image
-                        src={"/assets/icons/people.png"}
-                        height={50}
-                        width={50}
+                        src={"/assets/icons/clipboard-check.svg"}
+                        height={38}
+                        width={38}
                         alt={""}
                         className="object-contain mr-3"
                     />

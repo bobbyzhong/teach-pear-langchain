@@ -34,6 +34,7 @@ export default async function RootLayout({
             <meta name="description" content="Teach with Pear" />
             <meta property="og:image" content="/landing.png" />
             <link rel="icon" href="/assets/icons/pearemoji.png" />
+
             <body className={inter.className}>
                 {" "}
                 <AuthProvider accessToken={accessToken}>

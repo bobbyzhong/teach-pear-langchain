@@ -16,6 +16,7 @@ import DashNav from "./DashNav";
 import ButtonTool from "./ButtonTool";
 import ToolLink from "./ToolLink";
 import { PlainButton } from "./Button";
+import { QuizModal } from "./QuizModal";
 
 const USER_DATA_INITIAL_STATE = {
     user_id: "",
@@ -29,6 +30,7 @@ const USER_DATA_INITIAL_STATE = {
 export function Dashboard(user: any) {
     const [userData, setUserData] = useState<any>(USER_DATA_INITIAL_STATE);
     const [onboarded, setOnboarded] = useState<any>(false);
+    const [showModal, setShowModal] = useState<any>(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -49,6 +51,13 @@ export function Dashboard(user: any) {
 
         fetchData();
     }, []);
+    useEffect(() => {
+        if (showModal) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "scroll";
+        }
+    }, [showModal]);
 
     return (
         <div className="w-full">
@@ -58,8 +67,21 @@ export function Dashboard(user: any) {
                 </div>
             ) : (
                 <div>
+                    <QuizModal
+                        isVisible={showModal}
+                        onClose={() => {
+                            setShowModal(false);
+                        }}
+                    />
+
                     <div className="absolute w-full">
-                        <DashNav userInfo={userData} />
+                        <DashNav
+                            title={"Your Dashboard"}
+                            bio={
+                                "Below are some of the tools you can use to create teaching material"
+                            }
+                            userInfo={userData}
+                        />
                     </div>
                     <div className="MAIN CONTAINER bg-gray1 flex flex-row ">
                         <VertNav />
@@ -73,6 +95,9 @@ export function Dashboard(user: any) {
                                             icon={"assets/icons/star.svg"}
                                             title={"Make a quiz"}
                                             href={"/createQuiz"}
+                                            handleClick={() =>
+                                                setShowModal(true)
+                                            }
                                         >
                                             Create an adaptive quiz based on
                                             your own content whether it be from
@@ -223,43 +248,6 @@ export function Dashboard(user: any) {
                         </div>
                     </div>
                 </div>
-                // <div>
-                //     <div className="bg-[#ececec] ">
-
-                //     </div>
-                //     <div className="w-full flex items-center justify-center mb-10">
-                //         <SignOut />
-                //     </div>
-                // </div>
-                // <div className="flex flex-col items-center">
-                //     <div className="PROFILE shadow-lg md:w-[38rem] md:p-20 w-full p-10  bg-white rounded-xl mt-32">
-                //         <h1 className="border-b-2 text-xl pb-3">
-                //             Your Profile
-                //         </h1>
-
-                //         <StaticBox
-                //             label="First Name"
-                //             name="f_name"
-                //             type="text"
-                //             value={userData[0].f_name}
-                //             statusCompleted={userData.f_name ? true : false}
-                //         />
-                //         <StaticBox
-                //             label="Last Name"
-                //             name="l_name"
-                //             type="text"
-                //             value={userData[0].l_name}
-                //             statusCompleted={userData.f_name ? true : false}
-                //         />
-                //         <StaticBox
-                //             label="School you teach at"
-                //             name="school"
-                //             type="text"
-                //             value={userData[0].school}
-                //             statusCompleted={userData.f_name ? true : false}
-                //         />
-                //     </div>
-                // </div>
             )}
         </div>
     );
