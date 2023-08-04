@@ -8,7 +8,7 @@ import SignOut from "./SignOut";
 
 export default function VertNav() {
     return (
-        <div className="sticky top-[0] z-[50] border-r  border-gray2 bg-white1 h-[98vh]">
+        <div className="sticky top-[0] z-[50] border-r  border-gray2 bg-white1 h-[99vh]">
             <div className="border-b border-gray2 pr-16">
                 <h1 className="font-outfit">
                     <Link href={"/"}>
@@ -20,7 +20,7 @@ export default function VertNav() {
                     </Link>
                 </h1>
             </div>
-            <div className="flex flex-col h-full justify-between ml-8">
+            <div className="flex flex-col justify-between ml-8">
                 <div className="">
                     <h2 className="mt-5 mb-8 text-zinc-400 font-[650]  text-[11.5px]">
                         GENERAL

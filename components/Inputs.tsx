@@ -143,7 +143,7 @@ export function SelectBox({
                 onChange={handleChange}
                 name={name}
                 id="countries"
-                className="focus:border-green2 focus:ring-green2 focus:outline-none border-[1.5px] w-full p-2.5 "
+                className="focus:border-green2 focus:ring-green2 rounded-md focus:outline-none border-[1.5px] w-full p-2.5 "
             >
                 {options.map((op, index) => (
                     <option key={index} value={op}>

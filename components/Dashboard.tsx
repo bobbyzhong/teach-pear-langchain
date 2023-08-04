@@ -51,13 +51,13 @@ export function Dashboard(user: any) {
 
         fetchData();
     }, []);
-    useEffect(() => {
-        if (showModal) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "scroll";
-        }
-    }, [showModal]);
+    // useEffect(() => {
+    //     if (showModal) {
+    //         document.body.style.overflow = "hidden";
+    //     } else {
+    //         document.body.style.overflow = "scroll";
+    //     }
+    // }, [showModal]);
 
     return (
         <div className="w-full">

@@ -65,11 +65,11 @@ export default function Navbar({ className }: { className?: string }) {
                     } absolute left-1/2 top-36 transform md:hidden -translate-x-1/2  backdrop-filter backdrop-blur-[14px] border-2 border-gray-400 bg-opacity-10 
            -translate-y-16  flex flex-col gap-2 z-50 p-4 w-[80%] text-black font-bold rounded-lg`}
                 >
-                    <NavLink
+                    {/* <NavLink
                         href="/login"
                         text="Login"
                         currentPath={pathname}
-                    />
+                    /> */}
                     <NavLink href="/demo" text="Demo" currentPath={pathname} />
                     <NavLink
                         href="/contact"
@@ -81,11 +81,11 @@ export default function Navbar({ className }: { className?: string }) {
                 <nav
                     className={`items-center hidden md:flex md:flex-row md:gap-3 md:mr-8 `}
                 >
-                    <NavLink
+                    {/* <NavLink
                         href="/login"
                         text="Login"
                         currentPath={pathname}
-                    />
+                    /> */}
                     <NavLink href="/demo" text="Demo" currentPath={pathname} />
                     <NavLink
                         href="/contact"

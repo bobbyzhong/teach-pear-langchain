@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 
 export default function QuestionItem({
     question,
@@ -32,19 +33,19 @@ export default function QuestionItem({
         <div>
             <div className="flex flex-col mb-3">
                 <label className="mb-1 ">
-                    <span className="font-semibold text-zinc-800 text-xl">
+                    <span className="font-light text-zinc-500 text-[17px]">
                         Question {currIndex + 1}.
                     </span>
                 </label>
                 <input
-                    className="px-1 w-content"
+                    className="font-[450]  bg-white1 text-zinc-900 tracking-tight"
                     type="text"
                     value={editedQuestion}
                     onChange={(e) => setEditedQuestion(e.target.value)}
                 />
             </div>
 
-            <div className="flex flex-col  ml-1 mb-3">
+            <div className="flex flex-col text-[15px] space-y-2 ml-5 mb-2">
                 {editedChoices.map((choice, index) => (
                     <div key={choice + index} className="">
                         <input
@@ -52,27 +53,37 @@ export default function QuestionItem({
                             type="text"
                             value={choice}
                             onChange={(e) => handleEditChoice(e, index)}
-                            className="w-full"
+                            className="w-full bg-white1"
                         />
                     </div>
                 ))}
             </div>
-            <div className="flex flex-row ml-1 mt-6">
+            <div className="flex flex-row ml-5 mt-6 w-full tracking-tight justify-between">
                 {" "}
-                <div className="flex flex-row">
+                <div className="flex flex-row items-center">
                     <h1>
-                        <b>Answer</b>:{" "}
+                        <span className="font-semibold">Answer</span>:{" "}
                     </h1>
 
                     <input
-                        className="ml-1"
+                        className="ml-1 bg-white1"
                         type="text"
                         value={editedAnswer}
                         onChange={(e) => setEditedAnswer(e.target.value)}
                     />
                 </div>
-                <button className="font-bold" onClick={handleSave}>
-                    Save Changes
+                <button
+                    className="font-semibold items-center  gap-3 flex flex-row"
+                    onClick={handleSave}
+                >
+                    <h1>Save Changes</h1>
+                    <Image
+                        src={"assets/icons/save.svg"}
+                        height={25}
+                        width={25}
+                        alt={""}
+                        className="mr-6"
+                    />
                 </button>
             </div>
         </div>
